@@ -13,7 +13,7 @@ public class CategoryService {
     }
 
     public static Category categorize(Transaction transaction) {
-        String targetAccountIban = transaction.getCounterparty();
+        String targetAccountIban = transaction.getCounterParty();
         HashMap<Category, List<String>> categoryMapping = getCategoriesListHashMap();
 
         return categoryMapping.entrySet().stream()
@@ -25,13 +25,13 @@ public class CategoryService {
 
     private static HashMap<Category, List<String>> getCategoriesListHashMap() {
         HashMap<Category, List<String>> categoryMapping = new HashMap<>(); //Linked HashMap for order
-        categoryMapping.put(Category.Clothes, Arrays.asList("Zara", "hm", "Guess", "Mango"));
-        categoryMapping.put(Category.Groceries, Arrays.asList("Lidl", "Aldi", "Albert", "Jumbo", "Coop"));
-        categoryMapping.put(Category.AirTravel, Arrays.asList("WizzAir", "RyanAir", "KLM", "Turkish Airlines"));
-        categoryMapping.put(Category.Energy, Arrays.asList("Eneco","Engie","Greenchoice"));
-        categoryMapping.put(Category.Furniture, Arrays.asList("Ikea", "Jysk"));
-        categoryMapping.put(Category.ConvenienceStores, Arrays.asList("Spar"));
-        categoryMapping.put(Category.Catering, Arrays.asList("HelloFresh"));
+        categoryMapping.put(Category.Clothes, Arrays.asList("zara", "hm", "guess", "mango"));
+        categoryMapping.put(Category.Groceries, Arrays.asList("lidl", "aldi", "albert", "jumbo", "coop"));
+        categoryMapping.put(Category.AirTravel, Arrays.asList("wizzair", "ryanair", "klm", "turkish airlines"));
+        categoryMapping.put(Category.Energy, Arrays.asList("eneco","engie","greenchoice"));
+        categoryMapping.put(Category.Furniture, Arrays.asList("ikea", "jysk"));
+        categoryMapping.put(Category.ConvenienceStores, Arrays.asList("spar"));
+        categoryMapping.put(Category.Catering, Arrays.asList("hellofresh"));
         return categoryMapping;
     }
 

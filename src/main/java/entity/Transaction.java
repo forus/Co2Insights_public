@@ -1,29 +1,26 @@
 package entity;
 
-import services.AggregationPeriod;
+import org.springframework.stereotype.Component;
 import services.CategoryService;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Transaction {
 
     private String sourceAccountIban;
-    private String counterparty;
+    private String counterParty;
     private long amount;
     private LocalDateTime transactionDate;
 
-    public Transaction(String sourceAccountIban, String counterparty, long amount, LocalDateTime transactionDate) {
+    public Transaction(String sourceAccountIban, String counterParty, long amount, LocalDateTime transactionDate) {
         this.sourceAccountIban = sourceAccountIban;
-        this.counterparty = counterparty;
+        this.counterParty = counterParty;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
-    public String getCounterparty() {
-        return counterparty;
+    public String getCounterParty() {
+        return counterParty;
     }
 
     public CategoryService.Category getCategory() {
@@ -63,7 +60,7 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "sourceAccountIban='" + sourceAccountIban + '\'' +
-                ", counterparty='" + counterparty + '\'' +
+                ", counterparty='" + counterParty + '\'' +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 '}';
