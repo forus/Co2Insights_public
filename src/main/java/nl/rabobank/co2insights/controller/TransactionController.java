@@ -1,9 +1,9 @@
-package controller;
+package nl.rabobank.co2insights.controller;
 
-import entity.Transaction;
+import nl.rabobank.co2insights.entity.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import services.TransactionService;
+import nl.rabobank.co2insights.services.TransactionService;
 
 import java.time.LocalDateTime;
 import java.util.*;

@@ -1,12 +1,26 @@
-package entity;
+package nl.rabobank.co2insights.entity;
 
-import org.springframework.stereotype.Component;
-import services.CategoryService;
+import jakarta.persistence.*;
+import nl.rabobank.co2insights.services.CategoryService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Transaction {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "sender_bank_account_id")
+    private Account sender;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_bank_account_id")
+    private Account receiver;
     private String sourceAccountIban;
     private String counterParty;
     private long amount;
@@ -17,6 +31,10 @@ public class Transaction {
         this.counterParty = counterParty;
         this.amount = amount;
         this.transactionDate = transactionDate;
+    }
+
+    public Transaction() {
+
     }
 
     public String getCounterParty() {
@@ -65,5 +83,14 @@ public class Transaction {
                 ", transactionDate=" + transactionDate +
                 '}';
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
 }
 

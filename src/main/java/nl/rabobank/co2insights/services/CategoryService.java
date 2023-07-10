@@ -1,6 +1,6 @@
-package services;
+package nl.rabobank.co2insights.services;
 
-import entity.Transaction;
+import nl.rabobank.co2insights.entity.Transaction;
 
 import java.util.*;
 

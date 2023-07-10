@@ -1,6 +1,6 @@
-import entity.Transaction;
+import nl.rabobank.co2insights.entity.Transaction;
 import org.junit.jupiter.api.Test;
-import services.CategoryService;
+import nl.rabobank.co2insights.services.CategoryService;
 
 import java.time.LocalDateTime;
 

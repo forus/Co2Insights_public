@@ -1,7 +1,7 @@
 package controller;
 
-import entity.Transaction;
-import org.example.Co2InsightsApplication;
+import nl.rabobank.co2insights.entity.Transaction;
+import nl.rabobank.co2insights.Co2InsightsApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import services.TransactionService;
+import nl.rabobank.co2insights.services.TransactionService;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -18,6 +18,7 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -50,7 +51,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    public void postTransactions() {
+    public void postTransactions() throws Exception {
 
     }
 

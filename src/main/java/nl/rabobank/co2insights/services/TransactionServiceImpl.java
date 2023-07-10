@@ -1,10 +1,8 @@
-package services;
+package nl.rabobank.co2insights.services;
 
-import entity.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import nl.rabobank.co2insights.entity.Transaction;
 import org.springframework.stereotype.Service;
-import repository.TransactionRepository;
+import nl.rabobank.co2insights.repository.TransactionRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
