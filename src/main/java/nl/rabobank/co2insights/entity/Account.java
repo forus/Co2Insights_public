@@ -10,8 +10,6 @@ import java.util.List;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String iban;
     private long balance;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -33,22 +31,13 @@ public class Account {
 
     }
 
-
     @Transient
-    public List<Transaction> getAllTransactions(){
+    public List<Transaction> getAllTransactions() {
         ArrayList<Transaction> transactionArrayList = new ArrayList<>();
         transactionArrayList.add((Transaction) incomingTransactions);
         transactionArrayList.add((Transaction) outgoingTransactions);
         transactionArrayList.sort(Comparator.comparing(Transaction::getTransactionDate));
         return transactionArrayList;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getIban() {

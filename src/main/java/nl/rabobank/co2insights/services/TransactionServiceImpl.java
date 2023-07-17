@@ -19,7 +19,7 @@ public class TransactionServiceImpl implements TransactionService{
     @Override
     public List<Transaction> getTransactionsByIban(String iban) {
         //TODO Check whether current user is allowed to see transactions for this IBAN
-        return transactionRepository.getAllTransactions().stream().filter(transaction -> transaction.getSourceAccountIban().equals(iban)).collect(Collectors.toList());
+        return transactionRepository.findAll().stream().filter(transaction -> transaction.getSourceAccountIban().equals(iban)).collect(Collectors.toList());
     }
 
 }

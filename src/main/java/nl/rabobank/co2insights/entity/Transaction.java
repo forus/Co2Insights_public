@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import nl.rabobank.co2insights.services.CategoryService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Transaction {
@@ -56,6 +54,7 @@ public class Transaction {
     public LocalDateTime getTransactionDate() {
         return transactionDate;
     }
+
     public long getCo2Emission() {
         return switch (getCategory()) {
             case Furniture, General, CarRental, DrugStores, TravelAgencies -> amount * 105;

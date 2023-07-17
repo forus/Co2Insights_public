@@ -14,7 +14,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import nl.rabobank.co2insights.repository.InMemoryTransactionRepository;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -24,10 +23,6 @@ import java.util.Set;
 
 @SpringBootApplication
 public class Co2InsightsApplication {
-
-    @Autowired
-    InMemoryTransactionRepository inMemoryTransactionRepository;
-
 
     private AccountRepository accountRepository;
     private TransactionRepository transactionRepository;
@@ -48,6 +43,7 @@ public class Co2InsightsApplication {
         return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
     }
 
+    /*
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         List<Transaction> inMemoryTransactions = inMemoryTransactionRepository.getAllTransactions();
@@ -55,6 +51,8 @@ public class Co2InsightsApplication {
         inMemoryTransactions.add(new Transaction("NL01436456457577", "wizzair", 200L, LocalDateTime.now()));
         inMemoryTransactions.add(new Transaction("NL34534546456457", "Lidl", 5L, LocalDateTime.now()));
     }
+
+     */
 
     @EventListener(ApplicationReadyEvent.class)
     public void doAfterApplicationReady(){
