@@ -1,5 +1,6 @@
 package nl.rabobank.co2insights.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import nl.rabobank.co2insights.services.CategoryService;
 
@@ -14,10 +15,12 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "sender_bank_account_id")
+    @JsonIgnore
     private Account sender;
 
     @ManyToOne
     @JoinColumn(name = "receiver_bank_account_id")
+    @JsonIgnore
     private Account receiver;
     private String sourceAccountIban;
     private String counterParty;
