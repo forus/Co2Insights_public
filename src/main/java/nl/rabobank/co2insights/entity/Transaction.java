@@ -34,6 +34,37 @@ public class Transaction {
     public Transaction() {
 
     }
+    public Account getSender() {
+        return sender;
+    }
+
+    public void setSender(Account sender) {
+        this.sender = sender;
+    }
+
+    public Account getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(Account receiver) {
+        this.receiver = receiver;
+    }
+
+    public void setSourceAccountIban(String sourceAccountIban) {
+        this.sourceAccountIban = sourceAccountIban;
+    }
+
+    public void setCounterParty(String counterParty) {
+        this.counterParty = counterParty;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
 
     public String getCounterParty() {
         return counterParty;

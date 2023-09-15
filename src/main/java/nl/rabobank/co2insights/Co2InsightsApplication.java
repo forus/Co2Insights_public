@@ -56,25 +56,38 @@ public class Co2InsightsApplication {
 
     @EventListener(ApplicationReadyEvent.class)
     public void doAfterApplicationReady(){
-        Account account = new Account();
-        account.setIban("NLRABO293864298365");
-        account.setBalance(3459L);
-        accountRepository.save(account);
+        Customer jane = new Customer();
+        jane.setFullName("Jane Doe");
+        jane.setAddress("Street 123");
+        jane.setEmail("abc@gmail.com");
+        jane.setPhone("0612647634");
+        jane.setPassword("a123456");
+        customerRepository.save(jane);
 
-        Customer customer = new Customer();
-        customer.setFullName("Jane Doe");
-        customer.setAddress("Street 123");
-        customer.setEmail("abc@gmail.com");
-        customer.setPhone("0612647634");
-        customer.setPassword("a123456");
-        customerRepository.save(customer);
+        Account janeAccount = new Account();
+        janeAccount.setIban("NLRABO293864298365");
+        janeAccount.setBalance(3459L);
+        janeAccount.setCustomer(jane);
+        accountRepository.save(janeAccount);
 
+        Customer bob = new Customer();
+        bob.setFullName("Bob Smith");
+        bob.setAddress("Street 231");
+        bob.setEmail("bob@gmail.com");
+        bob.setPhone("0634521295");
+        bob.setPassword("bob123");
+        customerRepository.save(bob);
 
+        Account bobAccount = new Account();
+        bobAccount.setIban("NLRAB1O93864298360");
+        bobAccount.setBalance(1000L);
+        bobAccount.setCustomer(bob);
+        accountRepository.save(bobAccount);
 
-        Set<Account> accounts = new HashSet<>();
-        accounts.add(account);
-        customer.setAccount(accounts);
-
-
+        Transaction transaction1 = new Transaction();
+        transaction1.setSender(janeAccount);
+        transaction1.setReceiver(bobAccount);
+        transaction1.setAmount(100);
+        transactionRepository.save(transaction1);
     }
 }
