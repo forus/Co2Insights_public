@@ -17,6 +17,7 @@ import org.springframework.context.event.EventListener;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -90,6 +91,7 @@ public class Co2InsightsApplication {
         transaction1.setReceiver(bobAccount);
         transaction1.setCounterParty(bobAccount.getIban());
         transaction1.setAmount(100);
+        transaction1.setTransactionDate(LocalDateTime.of(2021, Month.AUGUST, 2, 10, 35));
         transactionRepository.save(transaction1);
 
         Transaction transaction2 = new Transaction();
@@ -97,6 +99,7 @@ public class Co2InsightsApplication {
         transaction2.setSourceAccountIban(janeAccount.getIban());
         transaction2.setCounterParty("lidl");
         transaction2.setAmount(15);
+        transaction2.setTransactionDate(LocalDateTime.of(2023, Month.MARCH, 11, 18, 50));
         transactionRepository.save(transaction2);
     }
 }
