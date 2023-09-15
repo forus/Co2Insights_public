@@ -86,7 +86,9 @@ public class Co2InsightsApplication {
 
         Transaction transaction1 = new Transaction();
         transaction1.setSender(janeAccount);
+        transaction1.setSourceAccountIban(janeAccount.getIban());
         transaction1.setReceiver(bobAccount);
+        transaction1.setCounterParty(bobAccount.getIban());
         transaction1.setAmount(100);
         transactionRepository.save(transaction1);
     }
