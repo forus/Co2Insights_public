@@ -91,5 +91,12 @@ public class Co2InsightsApplication {
         transaction1.setCounterParty(bobAccount.getIban());
         transaction1.setAmount(100);
         transactionRepository.save(transaction1);
+
+        Transaction transaction2 = new Transaction();
+        transaction2.setSender(janeAccount);
+        transaction2.setSourceAccountIban(janeAccount.getIban());
+        transaction2.setCounterParty("lidl");
+        transaction2.setAmount(15);
+        transactionRepository.save(transaction2);
     }
 }
