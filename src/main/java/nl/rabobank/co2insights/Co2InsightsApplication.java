@@ -101,5 +101,13 @@ public class Co2InsightsApplication {
         transaction2.setAmount(15);
         transaction2.setTransactionDate(LocalDateTime.of(2023, Month.MARCH, 11, 18, 50));
         transactionRepository.save(transaction2);
+
+        Transaction transaction3 = new Transaction();
+        transaction3.setSender(bobAccount);
+        transaction3.setSourceAccountIban(bobAccount.getIban());
+        transaction3.setCounterParty("H&M");
+        transaction3.setAmount(30);
+        transaction3.setTransactionDate(LocalDateTime.of(2023, Month.JULY, 14, 14, 34));
+        transactionRepository.save(transaction3);
     }
 }

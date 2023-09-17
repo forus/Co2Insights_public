@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import nl.rabobank.co2insights.services.TransactionService;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -37,8 +39,9 @@ public class TransactionControllerTest {
     TransactionService transactionService;
 
     @Test
+    @WithMockUser(username = "test@test.com")
     public void getTransactions() throws Exception {
-        when(transactionService.getTransactionsByIban("NL01436456457577"))
+        when(transactionService.getTransactionsByIban("test@test.com", "NL01436456457577"))
                 .thenReturn(Arrays.asList(
                         new Transaction("NL01436456457577", "HM", 45L, LocalDateTime.now()),
                         new Transaction("NL01436456457577", "wizzair", 200L, LocalDateTime.now())

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import nl.rabobank.co2insights.services.TransactionService;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -19,8 +20,8 @@ public class TransactionController {
     private TransactionRepository transactionRepository;
 
     @GetMapping(value = "/transactions")
-    public List<Transaction> getTransactions(@RequestParam String iban) {
-        return transactionService.getTransactionsByIban(iban);
+    public List<Transaction> getTransactions(@RequestParam String iban, Principal principal) {
+        return transactionService.getTransactionsByIban(principal.getName(), iban);
     }
 
     /*
