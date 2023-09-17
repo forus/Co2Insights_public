@@ -14,6 +14,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -29,15 +30,18 @@ public class Co2InsightsApplication {
     private TransactionRepository transactionRepository;
     private CustomerRepository customerRepository;
 
+    private PasswordEncoder passwordEncoder;
+
     public static void main(String[] args) {
         SpringApplication.run(Co2InsightsApplication.class, args);
 
     }
 
-    public Co2InsightsApplication(AccountRepository accountRepository, TransactionRepository transactionRepository, CustomerRepository customerRepository){
+    public Co2InsightsApplication(AccountRepository accountRepository, TransactionRepository transactionRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder){
         this.customerRepository = customerRepository;
         this.accountRepository = accountRepository;
         this.transactionRepository = transactionRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server h2Server() throws SQLException {
@@ -62,7 +66,7 @@ public class Co2InsightsApplication {
         jane.setAddress("Street 123");
         jane.setEmail("jane@gmail.com");
         jane.setPhone("0612647634");
-        jane.setPassword("a123456");
+        jane.setPassword(passwordEncoder.encode("a123456"));
         customerRepository.save(jane);
 
         Account janeAccount = new Account();
@@ -76,7 +80,7 @@ public class Co2InsightsApplication {
         bob.setAddress("Street 231");
         bob.setEmail("bob@gmail.com");
         bob.setPhone("0634521295");
-        bob.setPassword("bob123");
+        bob.setPassword(passwordEncoder.encode("bob123"));
         customerRepository.save(bob);
 
         Account bobAccount = new Account();

@@ -2,6 +2,8 @@ package nl.rabobank.co2insights;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import nl.rabobank.co2insights.services.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -9,6 +11,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +32,9 @@ import java.util.function.Supplier;
 
 @Configuration
 public class SecurityConfiguration {
+
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // See explanation here
@@ -40,6 +46,7 @@ public class SecurityConfiguration {
             new XorCsrfTokenRequestAttributeHandler().handle(request, response, deferredCsrfToken);
         };
         return http
+                .userDetailsService(userDetailsService)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
@@ -61,21 +68,6 @@ public class SecurityConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
-
-    @Bean
-    UserDetailsService users() {
-        UserDetails jane = User
-                .withUsername("jane@gmail.com")
-                .password(passwordEncoder().encode("a123456"))
-                .roles("USER", "ADMIN")
-                .build();
-        UserDetails bob = User
-                .withUsername("bob@gmail.com")
-                .password(passwordEncoder().encode("bob123"))
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(jane, bob);
     }
 
     @Bean
