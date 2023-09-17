@@ -60,7 +60,7 @@ public class Co2InsightsApplication {
         Customer jane = new Customer();
         jane.setFullName("Jane Doe");
         jane.setAddress("Street 123");
-        jane.setEmail("abc@gmail.com");
+        jane.setEmail("jane@gmail.com");
         jane.setPhone("0612647634");
         jane.setPassword("a123456");
         customerRepository.save(jane);

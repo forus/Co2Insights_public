@@ -9,6 +9,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -55,5 +61,25 @@ public class SecurityConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    UserDetailsService users() {
+        UserDetails jane = User
+                .withUsername("jane@gmail.com")
+                .password(passwordEncoder().encode("a123456"))
+                .roles("USER", "ADMIN")
+                .build();
+        UserDetails bob = User
+                .withUsername("bob@gmail.com")
+                .password(passwordEncoder().encode("bob123"))
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(jane, bob);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
